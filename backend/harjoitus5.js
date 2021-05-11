@@ -1,12 +1,19 @@
 const fs = require('fs');
 
-const dataBuffer = fs.readFileSync('henkilo.json');
+const file = 'henkilo.json';
+const dataBuffer = fs.readFileSync(file);
+const dataJSON = dataBuffer.toString();
 
-const dataJSON = JSON.parse(dataBuffer);
+const person = JSON.parse(dataJSON);
+// console.log(dataJSON);
+// console.log(person);
 
-console.log(dataJSON);
+person.nimi = 'Anton';
+person.ika = '31';
 
-dataJSON.nimi = "Anton";
 
+// console.log(dataJSON);
+// console.log(person);
 
-console.log(dataJSON);
+const toWrite = JSON.stringify(person);
+fs.writeFileSync(file, toWrite);
