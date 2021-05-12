@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import React, { useEffect, useState } from "react";
 import "./App.css";
+
 
 function App() {
   const [data, setData] = useState();
@@ -11,6 +11,7 @@ function App() {
     axios
       .get(`http://localhost:4000/wiki?haku=${haku}`)
       .then(function (response) {
+        console.log(response.data)
         setData(response.data);
       })
       .catch(function (error) {
@@ -26,10 +27,12 @@ function App() {
         onChange={(event) => setHakuTemp(event.target.value)}
       />
       <button onClick={(event) => setHaku(hakuTemp)}>Hae</button>
+      { console.log('data', data )}
       {data?.[0]?.title && <h1>{data[0].title}</h1>}
       {data?.[0]?.thumbnail?.source && (
-        <img src={data?.[0]?.thumbnail?.source} />
+        <img alt="somepic" src={data?.[0]?.thumbnail?.source} />
       )}
+
       {data?.[0]?.extract && <p>{data[0].extract}</p>}
     </div>
   );
